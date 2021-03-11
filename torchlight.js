@@ -14,9 +14,11 @@
 
 class TorchLight {
 	static async addTorchLightButtons(app, html, data) {
+		console.log("addTorchLightButton");
 
 		// Visually and functionally enable a torchlight button
 		function enableTorchlightButton(tbutton) {
+			console.log("enableTorchlightButton: " + tbutton);
 			// Remove the disabled status, if any
 			tbutton.find('i').removeClass('fa-disabled');
 
@@ -55,67 +57,66 @@ class TorchLight {
 						await app.object.setFlag("torchlight", "statusLight", true);
 						tbuttonLight.addClass("active");
 						// Light is active, disable the other light sources
-						disableTorchlightButton(tbuttonLantern);
-						disableTorchlightButton(tbuttonTorch);
+						enableRelevantButtons();
 						// Store the lighting for later restoration
-						storeTokenLighting();
+						await storeTokenLighting();
 						// Enable the Light Source according to the type
 						// "torch" / "pulse" / "chroma" / "wave" / "fog" / "sunburst" / "dome"
 						// "emanation" / "hexa" / "ghost" / "energy" / "roiling" / "hole"
 						let nBright = game.settings.get("torchlight", "lightBrightRadius");
-						let nDim    = game.settings.get("torchlight", "lightDimRadius");
-						let nType   = game.settings.get("torchlight", "lightType");
-						switch (nType){
+						let nDim = game.settings.get("torchlight", "lightDimRadius");
+						let nType = game.settings.get("torchlight", "lightType");
+						switch (nType) {
 							case "Type0":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "none", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "none", 5, 5);
 								break;
 							case "Type1":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "torch", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "torch", 5, 5);
 								break;
 							case "Type2":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "chroma", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "chroma", 5, 5);
 								break;
 							case "Type3":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "pulse", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "pulse", 5, 5);
 								break;
 							case "Type4":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "ghost", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "ghost", 5, 5);
 								break;
 							case "Type5":
-								updateTokenLighting(nBright,nDim, "#ffffff", "0.5", 360, "emanation", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ffffff", "0.5", 360, "emanation", 5, 5);
 								break;
 							case "Type6":
-								updateTokenLighting(nBright,nDim, "#ff0000", "0.5", 360, "torch", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ff0000", "0.5", 360, "torch", 5, 5);
 								break;
 							case "Type7":
-								updateTokenLighting(nBright,nDim, "#ff0000", "0.5", 360, "chroma", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ff0000", "0.5", 360, "chroma", 5, 5);
 								break;
 							case "Type8":
-								updateTokenLighting(nBright,nDim, "#ff0000", "0.5", 360, "pulse", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ff0000", "0.5", 360, "pulse", 5, 5);
 								break;
 							case "Type9":
-								updateTokenLighting(nBright,nDim, "#ff0000", "0.5", 360, "ghost", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ff0000", "0.5", 360, "ghost", 5, 5);
 								break;
 							case "Type10":
-								updateTokenLighting(nBright,nDim, "#ff0000", "0.5", 360, "emanation", 5, 5);
+								updateTokenLighting(nBright, nDim, "#ff0000", "0.5", 360, "emanation", 5, 5);
 								break;
 							case "Type11":
-								updateTokenLighting(nBright,nDim, "#00ff00", "0.5", 360, "torch", 5, 5);
+								updateTokenLighting(nBright, nDim, "#00ff00", "0.5", 360, "torch", 5, 5);
 								break;
 							case "Type12":
-								updateTokenLighting(nBright,nDim, "#00ff00", "0.5", 360, "chroma", 5, 5);
+								updateTokenLighting(nBright, nDim, "#00ff00", "0.5", 360, "chroma", 5, 5);
 								break;
 							case "Type13":
-								updateTokenLighting(nBright,nDim, "#00ff00", "0.5", 360, "pulse", 5, 5);
+								updateTokenLighting(nBright, nDim, "#00ff00", "0.5", 360, "pulse", 5, 5);
 								break;
 							case "Type14":
-								updateTokenLighting(nBright,nDim, "#00ff00", "0.5", 360, "ghost", 5, 5);
+								updateTokenLighting(nBright, nDim, "#00ff00", "0.5", 360, "ghost", 5, 5);
 								break;
 							case "Type15":
-								updateTokenLighting(nBright,nDim, "#00ff00", "0.5", 360, "emanation", 5, 5);
+								updateTokenLighting(nBright, nDim, "#00ff00", "0.5", 360, "emanation", 5, 5);
 								break;
 							case "TypeC":
-								updateTokenLighting(nBright,nDim,
+								updateTokenLighting(nBright, nDim,
 									game.settings.get("torchlight", "customLightColor"),
 									game.settings.get("torchlight", "customLightColorIntensity"),
 									360,
@@ -125,7 +126,7 @@ class TorchLight {
 								break;
 						}
 					}
-				// Or are we dealing with the Lantern Button
+					// Or are we dealing with the Lantern Button
 				} else if (tbutton === tbuttonLantern) {
 					// Check if the token has the lantern on
 					if (statusLantern) {
@@ -156,47 +157,46 @@ class TorchLight {
 							await app.object.setFlag("torchlight", "statusLantern", true);
 							tbuttonLantern.addClass("active");
 							// Lantern is active, disable the other light sources
-							disableTorchlightButton(tbuttonLight);
-							disableTorchlightButton(tbuttonTorch);
+							enableRelevantButtons();
 							// Store the lighting for later restoration
-							storeTokenLighting();
+							await storeTokenLighting();
 							// Enable the Lantern Source according to the type
 							let nBright = game.settings.get("torchlight", "lanternBrightRadius");
-							let nDim    = game.settings.get("torchlight", "lanternDimRadius");
-							let nType   = game.settings.get("torchlight", "lanternType");
-							switch (nType){
+							let nDim = game.settings.get("torchlight", "lanternDimRadius");
+							let nType = game.settings.get("torchlight", "lanternType");
+							switch (nType) {
 								case "Type0":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.7", 360, "none", 10, 7);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.7", 360, "none", 10, 7);
 									break;
 								case "Type1":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.7", 360, "torch", 10, 7);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.7", 360, "torch", 10, 7);
 									break;
 								case "Type2":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.5", 360, "torch", 10, 5);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.5", 360, "torch", 10, 5);
 									break;
 								case "Type3":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.3", 360, "torch", 10, 3);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.3", 360, "torch", 10, 3);
 									break;
 								case "Type4":
-									updateTokenLighting(5,5, "#a2642a", "0.7", 360, "torch", 10, 7);
+									updateTokenLighting(5, 5, "#a2642a", "0.7", 360, "torch", 10, 7);
 									break;
 								case "Type5":
-									updateTokenLighting(5,5, "#a2642a", "0.5", 360, "torch", 10, 5);
+									updateTokenLighting(5, 5, "#a2642a", "0.5", 360, "torch", 10, 5);
 									break;
 								case "Type6":
-									updateTokenLighting(5,5, "#a2642a", "0.3", 360, "torch", 10, 3);
+									updateTokenLighting(5, 5, "#a2642a", "0.3", 360, "torch", 10, 3);
 									break;
 								case "Type7":
-									updateTokenLighting(nBright*2,nDim*2, "#a2642a", "0.7", 60, "torch", 10, 7);
+									updateTokenLighting(nBright * 2, nDim * 2, "#a2642a", "0.7", 60, "torch", 10, 7);
 									break;
 								case "Type8":
-									updateTokenLighting(nBright*2,nDim*2, "#a2642a", "0.5", 60, "torch", 10, 5);
+									updateTokenLighting(nBright * 2, nDim * 2, "#a2642a", "0.5", 60, "torch", 10, 5);
 									break;
 								case "Type9":
-									updateTokenLighting(nBright*2,nDim*2, "#a2642a", "0.3", 60, "torch", 10, 3);
+									updateTokenLighting(nBright * 2, nDim * 2, "#a2642a", "0.3", 60, "torch", 10, 3);
 									break;
 								case "TypeC":
-									updateTokenLighting(nBright,nDim,
+									updateTokenLighting(nBright, nDim,
 										game.settings.get("torchlight", "customLanternColor"),
 										game.settings.get("torchlight", "customLanternColorIntensity"),
 										360,
@@ -215,7 +215,7 @@ class TorchLight {
 							disableTorchlightButton(tbuttonLantern);
 						}
 					}
-				// Or are we dealing with the Torch Button
+					// Or are we dealing with the Torch Button
 				} else if (tbutton === tbuttonTorch) {
 					// Check if the token has the torch on
 					if (statusTorch) {
@@ -246,47 +246,46 @@ class TorchLight {
 							await app.object.setFlag("torchlight", "statusTorch", true);
 							tbuttonTorch.addClass("active");
 							// Torch is active, disable the other light sources
-							disableTorchlightButton(tbuttonLight);
-							disableTorchlightButton(tbuttonLantern);
+							enableRelevantButtons();
 							// Store the lighting for later restoration
-							storeTokenLighting();
+							await storeTokenLighting();
 							// Enable the Torch Source according to the type
 							let nBright = game.settings.get("torchlight", "torchBrightRadius");
-							let nDim    = game.settings.get("torchlight", "torchDimRadius");
-							let nType   = game.settings.get("torchlight", "torchType");
-							switch (nType){
+							let nDim = game.settings.get("torchlight", "torchDimRadius");
+							let nType = game.settings.get("torchlight", "torchType");
+							switch (nType) {
 								case "Type0":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.7", 360, "none", 5, 7);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.7", 360, "none", 5, 7);
 									break;
 								case "Type1":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.7", 360, "torch", 5, 7);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.7", 360, "torch", 5, 7);
 									break;
 								case "Type2":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.5", 360, "torch", 5, 5);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.5", 360, "torch", 5, 5);
 									break;
 								case "Type3":
-									updateTokenLighting(nBright,nDim, "#a2642a", "0.3", 360, "torch", 5, 3);
+									updateTokenLighting(nBright, nDim, "#a2642a", "0.3", 360, "torch", 5, 3);
 									break;
 								case "Type4":
-									updateTokenLighting(nBright,nDim, "#a22a2a", "0.7", 360, "torch", 5, 7);
+									updateTokenLighting(nBright, nDim, "#a22a2a", "0.7", 360, "torch", 5, 7);
 									break;
 								case "Type5":
-									updateTokenLighting(nBright,nDim, "#a22a2a", "0.5", 360, "torch", 5, 5);
+									updateTokenLighting(nBright, nDim, "#a22a2a", "0.5", 360, "torch", 5, 5);
 									break;
 								case "Type6":
-									updateTokenLighting(nBright,nDim, "#a22a2a", "0.3", 360, "torch", 5, 3);
+									updateTokenLighting(nBright, nDim, "#a22a2a", "0.3", 360, "torch", 5, 3);
 									break;
 								case "Type7":
-									updateTokenLighting(nBright,nDim, "#822aa2", "0.7", 360, "torch", 5, 7);
+									updateTokenLighting(nBright, nDim, "#822aa2", "0.7", 360, "torch", 5, 7);
 									break;
 								case "Type8":
-									updateTokenLighting(nBright,nDim, "#822aa2", "0.5", 360, "torch", 5, 5);
+									updateTokenLighting(nBright, nDim, "#822aa2", "0.5", 360, "torch", 5, 5);
 									break;
 								case "Type9":
-									updateTokenLighting(nBright,nDim, "#822aa2", "0.3", 360, "torch", 5, 3);
+									updateTokenLighting(nBright, nDim, "#822aa2", "0.3", 360, "torch", 5, 3);
 									break;
 								case "TypeC":
-									updateTokenLighting(nBright,nDim,
+									updateTokenLighting(nBright, nDim,
 										game.settings.get("torchlight", "customTorchColor"),
 										game.settings.get("torchlight", "customTorchColorIntensity"),
 										360,
@@ -312,79 +311,87 @@ class TorchLight {
 		// Visually and functionally disable a torchlight button
 		function disableTorchlightButton(tbutton) {
 			tbutton.find('i').addClass('fa-disabled');
-			tbutton.find('i').off( "click" );
+			tbutton.find('i').off("click");
 			tbutton.removeClass("active");
 		}
 
 
 		// Enable or disable buttons according to parameters
 		function enableRelevantButtons() {
+			disableTorchlightButton(tbuttonLight);
+			disableTorchlightButton(tbuttonLantern);
+			disableTorchlightButton(tbuttonTorch);
 
-			// Stores if checks need to be made to enable buttons
-			let noCheck = game.system.id !== 'dnd5e';
-			if (!noCheck)
-				noCheck = (data.isGM && !game.settings.get("torchlight", "dmAsPlayer")) || !game.settings.get("torchlight", "checkAvailability");
-
-			if (noCheck || canCastLight())
+			if (statusLight) {
 				enableTorchlightButton(tbuttonLight);
-			else
-				disableTorchlightButton(tbuttonLight);
-
-			if (noCheck || (hasItemInInventory("Oil (flask)") && (hasItemInInventory("Lantern, Hooded") || hasItemInInventory("Lantern, Bullseye"))))
+			} else if (statusLantern) {
 				enableTorchlightButton(tbuttonLantern);
-			else
-				disableTorchlightButton(tbuttonLantern);
-
-			if (noCheck || hasItemInInventory("Torch"))
+			} else if (statusTorch) {
 				enableTorchlightButton(tbuttonTorch);
-			else
-				disableTorchlightButton(tbuttonTorch);
+			} else {
+				// Stores if checks need to be made to enable buttons
+				let noCheck = game.system.id !== 'dnd5e';
+				if (!noCheck)
+					noCheck = (data.isGM && !game.settings.get("torchlight", "dmAsPlayer")) || !game.settings.get("torchlight", "checkAvailability");
 
+				if (noCheck || canCastLight())
+					enableTorchlightButton(tbuttonLight);
+
+				if (noCheck || (hasItemInInventory("Oil (flask)") && (hasItemInInventory("Lantern, Hooded") || hasItemInInventory("Lantern, Bullseye"))))
+					enableTorchlightButton(tbuttonLantern);
+
+				if (noCheck || hasItemInInventory("Torch"))
+					enableTorchlightButton(tbuttonTorch);
+			}
 		}
 
 
 		// Update the relevant light parameters of a token
 		function updateTokenLighting(brightLight, dimLight, lightColor, colorIntensity, lightAngle, animationType, animationSpeed, animationIntensity) {
-				const lightEffect = {
-					"type": animationType,
-					"speed": animationSpeed,
-					"intensity": animationIntensity
-				};
+			const lightEffect = {
+				"type": animationType,
+				"speed": animationSpeed,
+				"intensity": animationIntensity
+			};
 			app.object.update({
 				brightLight: brightLight,
 				dimLight: dimLight,
 				lightColor: lightColor,
-				lightAlpha: (colorIntensity * colorIntensity),
+				lightAlpha: colorIntensity ? (colorIntensity * colorIntensity) : undefined,
 				lightAngle: lightAngle,
 				"lightAnimation": lightEffect
 			});
 		}
 
 		// Store the initial status of illumination for the token to restore if all light sources are extinguished
-		function storeTokenLighting() {
-			app.object.setFlag("torchlight", "InitialBrightRadius", app.object.data.brightLight);
-			app.object.setFlag("torchlight", "InitialDimRadius", app.object.data.dimLight);
-			app.object.setFlag("torchlight", "InitialLightColor", app.object.light.color);
-			if (app.object.light.animation === undefined)
-				app.object.setFlag("torchlight", "InitialColorIntensity", 0.5);
-			else
-				app.object.setFlag("torchlight", "InitialColorIntensity", app.object.light.alpha);
-			app.object.setFlag("torchlight", "InitialLightAngle", app.object.light.angle);
+		async function storeTokenLighting() {
+			await app.object.setFlag("torchlight", "InitialBrightRadius", app.object.data.brightLight);
+			await app.object.setFlag("torchlight", "InitialDimRadius", app.object.data.dimLight);
+			await app.object.setFlag("torchlight", "InitialLightColor", app.object.data.lightColor);
+			await app.object.setFlag("torchlight", "InitialLightAngle", app.object.data.lightAngle);
+			await app.object.setFlag("torchlight", "InitialColorIntensity", app.object.data.lightAlpha);
+			//await app.object.setFlag("torchlight", "InitialLightColor", app.object.light.color);
+			//if (app.object.light === undefined)
+			//	await app.object.setFlag("torchlight", "InitialColorIntensity", 0.5);
+			//else
+			//	await app.object.setFlag("torchlight", "InitialColorIntensity", app.object.light.alpha);
+			//	await app.object.setFlag("torchlight", "InitialLightAngle", app.object.light.angle);
+
 			if (app.object.light.animation === undefined) {
-				app.object.setFlag("torchlight", "InitialAnimationType", "none");
-				app.object.setFlag("torchlight", "InitialAnimationSpeed", 5);
-				app.object.setFlag("torchlight", "InitialAnimationIntensity", 5);
+				await app.object.setFlag("torchlight", "InitialAnimationType", "none");
+				await app.object.setFlag("torchlight", "InitialAnimationSpeed", 5);
+				await app.object.setFlag("torchlight", "InitialAnimationIntensity", 5);
 			} else {
-				app.object.setFlag("torchlight", "InitialAnimationType", app.object.light.animation.type);
-				app.object.setFlag("torchlight", "InitialAnimationSpeed", app.object.light.animation.speed);
-				app.object.setFlag("torchlight", "InitialAnimationIntensity", app.object.light.animation.intensity);
+				await app.object.setFlag("torchlight", "InitialAnimationType", app.object.light.animation.type);
+				await app.object.setFlag("torchlight", "InitialAnimationSpeed", app.object.light.animation.speed);
+				await app.object.setFlag("torchlight", "InitialAnimationIntensity", app.object.light.animation.intensity);
 			}
 
 			console.log("Stored brightRadius:" + app.object.getFlag("torchlight", "InitialBrightRadius"));
 			console.log("Stored dimRadius:" + app.object.getFlag("torchlight", "InitialDimRadius"));
 			console.log("Stored lightColor:" + app.object.getFlag("torchlight", "InitialLightColor"));
-			console.log("Stored light.alpha:" + app.object.getFlag("torchlight", "InitialColorIntensity"));
-			console.log("Stored dimRadius:" + app.object.getFlag("torchlight", "InitialLightAngle"));
+			console.log("Stored lightAlpha:" + app.object.getFlag("torchlight", "InitialColorIntensity"));
+			console.log("Stored lightAngle:" + app.object.getFlag("torchlight", "InitialLightAngle"));
 			console.log("Stored animation.type:" + app.object.getFlag("torchlight", "InitialAnimationType"));
 			console.log("Stored animation.speed:" + app.object.getFlag("torchlight", "InitialAnimationSpeed"));
 			console.log("Stored animation.intensity:" + app.object.getFlag("torchlight", "InitialAnimationIntensity"));
@@ -394,24 +401,24 @@ class TorchLight {
 		//let tbuttonLight   = $(`<div class="control-icon torchlight"><i class="fas fa-sun"></i></div>`);
 		//let tbuttonLantern = $(`<div class="control-icon torchlight"><i class="fas fa-lightbulb"></i></div>`);
 		//let tbuttonTorch   = $(`<div class="control-icon torchlight"><i class="fas fa-fire"></i></div>`);
-		let tbuttonLight   = $(`<div class="control-icon torchlight" title="Toggle Light Spell"><i class="fas fa-sun"></i></div>`);
+		let tbuttonLight = $(`<div class="control-icon torchlight" title="Toggle Light Spell"><i class="fas fa-sun"></i></div>`);
 		let tbuttonLantern = $(`<div class="control-icon torchlight" title="Toggle Lantern"><i class="fas fa-lightbulb"></i></div>`);
-		let tbuttonTorch   = $(`<div class="control-icon torchlight" title="Toggle Torch"><i class="fas fa-fire"></i></div>`);
+		let tbuttonTorch = $(`<div class="control-icon torchlight" title="Toggle Torch"><i class="fas fa-fire"></i></div>`);
 
 		// Get the position of the column
 		let position = game.settings.get('torchlight', 'position');
 
 		// Create the column
-		let buttonsdiv =  $(`<div class="col torchlight-column-${position}"></div>`);
+		let buttonsdiv = $(`<div class="col torchlight-column-${position}"></div>`);
 
-/*
-		// Wrap the previous icons
-		let newdiv = '<div class="torchlight-container"></div>';
-		html.find('.col.left').wrap(newdiv);
-
-		// Add the column
-		html.find('.col.left').before(buttonsdiv);
-*/
+		/*
+				// Wrap the previous icons
+				let newdiv = '<div class="torchlight-container"></div>';
+				html.find('.col.left').wrap(newdiv);
+		
+				// Add the column
+				html.find('.col.left').before(buttonsdiv);
+		*/
 
 		// Wrap the previous icons
 		let newdiv = '<div class="torchlight-container"></div>';
@@ -520,8 +527,8 @@ class TorchLight {
 			let consume = game.system.id !== 'dnd5e';
 			if (!consume)
 				consume = (data.isGM && !game.settings.get("torchlight", "dmAsPlayer")) ||
-								!game.settings.get("torchlight", "checkAvailability") ||
-								!game.settings.get("torchlight", "consumeItem");
+					!game.settings.get("torchlight", "checkAvailability") ||
+					!game.settings.get("torchlight", "consumeItem");
 			if (!consume) {
 				let actor = game.actors.get(data.actorId);
 				if (actor === undefined)
@@ -531,7 +538,7 @@ class TorchLight {
 					if (item.name.toLowerCase() === itemToCheck.toLowerCase()) {
 						if (item.data.quantity > 0) {
 							hasItem = true;
-							actor.updateOwnedItem({"_id": actor.data.items[offset]._id, "data.quantity": actor.data.items[offset].data.quantity - 1});
+							actor.updateOwnedItem({ "_id": actor.data.items[offset]._id, "data.quantity": actor.data.items[offset].data.quantity - 1 });
 						}
 					}
 				});
@@ -546,7 +553,7 @@ class TorchLight {
 		function firstGM() {
 			let i;
 
-			for (i=0; i<game.users.entities.length; i++) {
+			for (i = 0; i < game.users.entities.length; i++) {
 				if (game.users.entities[i].data.role >= 4 && game.users.entities[i].active)
 					return game.users.entities[i].data._id;
 			}
@@ -567,24 +574,24 @@ class TorchLight {
 		}
 
 		// Finally insert the buttons in the column
-		html.find('.col.torchlight-column-'+position).prepend(tbuttonTorch);
-		html.find('.col.torchlight-column-'+position).prepend(tbuttonLantern);
-		html.find('.col.torchlight-column-'+position).prepend(tbuttonLight);
+		html.find('.col.torchlight-column-' + position).prepend(tbuttonTorch);
+		html.find('.col.torchlight-column-' + position).prepend(tbuttonLantern);
+		html.find('.col.torchlight-column-' + position).prepend(tbuttonLight);
 	}
 
 	static async handleSocketRequest(req) {
 		if (req.addressTo === undefined || req.addressTo === game.user._id) {
 			let scn = game.scenes.get(req.sceneId);
-			let tkn = scn.data.tokens.find(({_id}) => _id === req.tokenId);
-			let dltoks=[];
+			let tkn = scn.data.tokens.find(({ _id }) => _id === req.tokenId);
+			let dltoks = [];
 
-			switch(req.requestType) {
+			switch (req.requestType) {
 				case 'removeDancingLights':
 					scn.data.tokens.forEach(tok => {
 						if (tok.actorId === tkn.actorId &&
-						    tok.name === 'Dancing Light' &&
-						    tok.dimLight === 20 &&
-						    tok.brightLight === 10) {
+							tok.name === 'Dancing Light' &&
+							tok.dimLight === 20 &&
+							tok.brightLight === 10) {
 							//let dltok = canvas.tokens.get(tok._id);
 							dltoks.push(scn.getEmbeddedEntity("Token", tok._id)._id);
 						}
@@ -599,10 +606,10 @@ class TorchLight {
 Hooks.on('ready', () => {
 	Hooks.on('renderTokenHUD', (app, html, data) => { TorchLight.addTorchLightButtons(app, html, data) });
 	Hooks.on('renderControlsReference', (app, html, data) => {
-		html.find('div').first().append('<h3>TorchLight</h3><ol class="hotkey-list"><li><h4>'+
-			game.i18n.localize("torchlight.turnOffAllLights")+
-			'</h4><div class="keys">'+
-			game.i18n.localize("torchlight.holdCtrlOnClick")+
+		html.find('div').first().append('<h3>TorchLight</h3><ol class="hotkey-list"><li><h4>' +
+			game.i18n.localize("torchlight.turnOffAllLights") +
+			'</h4><div class="keys">' +
+			game.i18n.localize("torchlight.holdCtrlOnClick") +
 			'</div></li></ol>');
 	});
 	game.socket.on("module.torch", request => {
