@@ -2,7 +2,7 @@
 	"name": "torchlight",
 	"title": "TorchLight",
 	"description": "TorchLight HUD Controls",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"author": "PhilippeK",
 	"languages": [
 		{
@@ -23,6 +23,7 @@
 	],
 	"packs": [],
 	"manifest": "https://raw.githubusercontent.com/DaanS/TorchLight/main/module.json",
-	"minimumCoreVersion": "0.5.4",
+	"download": "https://github.com/DaanS/TorchLight/archive/refs/tags/v0.9.1.zip",
+	"minimumCoreVersion": "0.8.0",
 	"compatibleCoreVersion": "0.8.7"
 }
