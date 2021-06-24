@@ -35,26 +35,26 @@ class TorchLight {
 						// The token has the light spell on
 						console.log("Clicked on the light button when the light is on.");
 						statusLight = false;
-						await app.object.setFlag("torchlight", "statusLight", false);
+						await app.object.document.setFlag("torchlight", "statusLight", false);
 						tbuttonLight.removeClass("active");
 						// Light is inactive, enable the relevant light sources according to parameters
 						enableRelevantButtons();
 						// Restore the initial light source
 						updateTokenLighting(
-							app.object.getFlag("torchlight", "InitialBrightRadius"),
-							app.object.getFlag("torchlight", "InitialDimRadius"),
-							app.object.getFlag("torchlight", "InitialLightColor"),
-							app.object.getFlag("torchlight", "InitialColorIntensity"),
-							app.object.getFlag("torchlight", "InitialLightAngle"),
-							app.object.getFlag("torchlight", "InitialAnimationType"),
-							app.object.getFlag("torchlight", "InitialAnimationSpeed"),
-							app.object.getFlag("torchlight", "InitialAnimationIntensity"),
+							app.object.document.getFlag("torchlight", "InitialBrightRadius"),
+							app.object.document.getFlag("torchlight", "InitialDimRadius"),
+							app.object.document.getFlag("torchlight", "InitialLightColor"),
+							app.object.document.getFlag("torchlight", "InitialColorIntensity"),
+							app.object.document.getFlag("torchlight", "InitialLightAngle"),
+							app.object.document.getFlag("torchlight", "InitialAnimationType"),
+							app.object.document.getFlag("torchlight", "InitialAnimationSpeed"),
+							app.object.document.getFlag("torchlight", "InitialAnimationIntensity"),
 						);
 					} else {
 						// The token does not have the light spell on
 						console.log("Clicked on the light button when the light is off.");
 						statusLight = true;
-						await app.object.setFlag("torchlight", "statusLight", true);
+						await app.object.document.setFlag("torchlight", "statusLight", true);
 						tbuttonLight.addClass("active");
 						// Light is active, disable the other light sources
 						enableRelevantButtons();
@@ -133,20 +133,20 @@ class TorchLight {
 						// The token has the light spell on
 						console.log("Clicked on the lantern button when the lantern is on.");
 						statusLantern = false;
-						await app.object.setFlag("torchlight", "statusLantern", false);
+						await app.object.document.setFlag("torchlight", "statusLantern", false);
 						tbuttonLantern.removeClass("active");
 						// Lantern is inactive, enable the relevant light sources according to parameters
 						enableRelevantButtons();
 						// Restore the initial light source
 						updateTokenLighting(
-							app.object.getFlag("torchlight", "InitialBrightRadius"),
-							app.object.getFlag("torchlight", "InitialDimRadius"),
-							app.object.getFlag("torchlight", "InitialLightColor"),
-							app.object.getFlag("torchlight", "InitialColorIntensity"),
-							app.object.getFlag("torchlight", "InitialLightAngle"),
-							app.object.getFlag("torchlight", "InitialAnimationType"),
-							app.object.getFlag("torchlight", "InitialAnimationSpeed"),
-							app.object.getFlag("torchlight", "InitialAnimationIntensity"),
+							app.object.document.getFlag("torchlight", "InitialBrightRadius"),
+							app.object.document.getFlag("torchlight", "InitialDimRadius"),
+							app.object.document.getFlag("torchlight", "InitialLightColor"),
+							app.object.document.getFlag("torchlight", "InitialColorIntensity"),
+							app.object.document.getFlag("torchlight", "InitialLightAngle"),
+							app.object.document.getFlag("torchlight", "InitialAnimationType"),
+							app.object.document.getFlag("torchlight", "InitialAnimationSpeed"),
+							app.object.document.getFlag("torchlight", "InitialAnimationIntensity"),
 						);
 					} else {
 						// The token does not have the lantern on
@@ -154,7 +154,7 @@ class TorchLight {
 						// Checks whether the character can consume an oil flask
 						if (consumeItem("Oil (flask)")) {
 							statusLantern = true;
-							await app.object.setFlag("torchlight", "statusLantern", true);
+							await app.object.document.setFlag("torchlight", "statusLantern", true);
 							tbuttonLantern.addClass("active");
 							// Lantern is active, disable the other light sources
 							enableRelevantButtons();
@@ -222,20 +222,20 @@ class TorchLight {
 						// The token has the torch on
 						console.log("Clicked on the torch button when the torch is on.");
 						statusTorch = false;
-						await app.object.setFlag("torchlight", "statusTorch", false);
+						await app.object.document.setFlag("torchlight", "statusTorch", false);
 						tbuttonTorch.removeClass("active");
 						// Torch is inactive, enable the relevant light sources according to parameters
 						await enableRelevantButtons();
 						// Restore the initial light source
 						updateTokenLighting(
-							app.object.getFlag("torchlight", "InitialBrightRadius"),
-							app.object.getFlag("torchlight", "InitialDimRadius"),
-							app.object.getFlag("torchlight", "InitialLightColor"),
-							app.object.getFlag("torchlight", "InitialColorIntensity"),
-							app.object.getFlag("torchlight", "InitialLightAngle"),
-							app.object.getFlag("torchlight", "InitialAnimationType"),
-							app.object.getFlag("torchlight", "InitialAnimationSpeed"),
-							app.object.getFlag("torchlight", "InitialAnimationIntensity"),
+							app.object.document.getFlag("torchlight", "InitialBrightRadius"),
+							app.object.document.getFlag("torchlight", "InitialDimRadius"),
+							app.object.document.getFlag("torchlight", "InitialLightColor"),
+							app.object.document.getFlag("torchlight", "InitialColorIntensity"),
+							app.object.document.getFlag("torchlight", "InitialLightAngle"),
+							app.object.document.getFlag("torchlight", "InitialAnimationType"),
+							app.object.document.getFlag("torchlight", "InitialAnimationSpeed"),
+							app.object.document.getFlag("torchlight", "InitialAnimationIntensity"),
 						);
 					} else {
 						// The token does not have the torch on
@@ -243,7 +243,7 @@ class TorchLight {
 						// Checks whether the character can consume a torch
 						if (consumeItem("Torch")) {
 							statusTorch = true;
-							await app.object.setFlag("torchlight", "statusTorch", true);
+							await app.object.document.setFlag("torchlight", "statusTorch", true);
 							tbuttonTorch.addClass("active");
 							// Torch is active, disable the other light sources
 							enableRelevantButtons();
@@ -353,7 +353,7 @@ class TorchLight {
 				"speed": animationSpeed,
 				"intensity": animationIntensity
 			};
-			app.object.update({
+			app.object.document.update({
 				brightLight: brightLight,
 				dimLight: dimLight,
 				lightColor: lightColor,
@@ -365,36 +365,33 @@ class TorchLight {
 
 		// Store the initial status of illumination for the token to restore if all light sources are extinguished
 		async function storeTokenLighting() {
-			await app.object.setFlag("torchlight", "InitialBrightRadius", app.object.data.brightLight);
-			await app.object.setFlag("torchlight", "InitialDimRadius", app.object.data.dimLight);
-			await app.object.setFlag("torchlight", "InitialLightColor", app.object.data.lightColor);
-			await app.object.setFlag("torchlight", "InitialLightAngle", app.object.data.lightAngle);
-			await app.object.setFlag("torchlight", "InitialColorIntensity", app.object.data.lightAlpha);
-			//await app.object.setFlag("torchlight", "InitialLightColor", app.object.light.color);
-			//if (app.object.light === undefined)
-			//	await app.object.setFlag("torchlight", "InitialColorIntensity", 0.5);
-			//else
-			//	await app.object.setFlag("torchlight", "InitialColorIntensity", app.object.light.alpha);
-			//	await app.object.setFlag("torchlight", "InitialLightAngle", app.object.light.angle);
+			let promises = [];
+			promises.push(app.object.document.setFlag("torchlight", "InitialBrightRadius", app.object.data.brightLight));
+			promises.push(app.object.document.setFlag("torchlight", "InitialDimRadius", app.object.data.dimLight));
+			promises.push(app.object.document.setFlag("torchlight", "InitialLightColor", app.object.data.lightColor));
+			promises.push(app.object.document.setFlag("torchlight", "InitialLightAngle", app.object.data.lightAngle));
+			promises.push(app.object.document.setFlag("torchlight", "InitialColorIntensity", app.object.data.lightAlpha));
 
 			if (app.object.light.animation === undefined) {
-				await app.object.setFlag("torchlight", "InitialAnimationType", "none");
-				await app.object.setFlag("torchlight", "InitialAnimationSpeed", 5);
-				await app.object.setFlag("torchlight", "InitialAnimationIntensity", 5);
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationType", "none"));
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationSpeed", 5));
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationIntensity", 5));
 			} else {
-				await app.object.setFlag("torchlight", "InitialAnimationType", app.object.light.animation.type);
-				await app.object.setFlag("torchlight", "InitialAnimationSpeed", app.object.light.animation.speed);
-				await app.object.setFlag("torchlight", "InitialAnimationIntensity", app.object.light.animation.intensity);
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationType", app.object.light.animation.type));
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationSpeed", app.object.light.animation.speed));
+				promises.push(app.object.document.setFlag("torchlight", "InitialAnimationIntensity", app.object.light.animation.intensity));
 			}
 
-			console.log("Stored brightRadius:" + app.object.getFlag("torchlight", "InitialBrightRadius"));
-			console.log("Stored dimRadius:" + app.object.getFlag("torchlight", "InitialDimRadius"));
-			console.log("Stored lightColor:" + app.object.getFlag("torchlight", "InitialLightColor"));
-			console.log("Stored lightAlpha:" + app.object.getFlag("torchlight", "InitialColorIntensity"));
-			console.log("Stored lightAngle:" + app.object.getFlag("torchlight", "InitialLightAngle"));
-			console.log("Stored animation.type:" + app.object.getFlag("torchlight", "InitialAnimationType"));
-			console.log("Stored animation.speed:" + app.object.getFlag("torchlight", "InitialAnimationSpeed"));
-			console.log("Stored animation.intensity:" + app.object.getFlag("torchlight", "InitialAnimationIntensity"));
+			//console.log("Stored brightRadius:" + app.object.document.getFlag("torchlight", "InitialBrightRadius"));
+			//console.log("Stored dimRadius:" + app.object.document.getFlag("torchlight", "InitialDimRadius"));
+			//console.log("Stored lightColor:" + app.object.document.getFlag("torchlight", "InitialLightColor"));
+			//console.log("Stored lightAlpha:" + app.object.document.getFlag("torchlight", "InitialColorIntensity"));
+			//console.log("Stored lightAngle:" + app.object.document.getFlag("torchlight", "InitialLightAngle"));
+			//console.log("Stored animation.type:" + app.object.document.getFlag("torchlight", "InitialAnimationType"));
+			//console.log("Stored animation.speed:" + app.object.document.getFlag("torchlight", "InitialAnimationSpeed"));
+			//console.log("Stored animation.intensity:" + app.object.document.getFlag("torchlight", "InitialAnimationIntensity"));
+
+			return Promise.all(promises);
 		}
 
 		// Define all three buttons
@@ -431,23 +428,23 @@ class TorchLight {
 		console.log("Initialisation");
 
 		// Get the status of the three types of lights
-		let statusLight = app.object.getFlag("torchlight", "statusLight");
+		let statusLight = app.object.document.getFlag("torchlight", "statusLight");
 		//console.log("Initial statusLight:" + statusLight);
 		if (statusLight == undefined || statusLight == null) {
 			statusLight = false;
-			await app.object.setFlag("torchlight", "statusLight", false);
+			await app.object.document.setFlag("torchlight", "statusLight", false);
 		}
-		let statusLantern = app.object.getFlag("torchlight", "statusLantern");
+		let statusLantern = app.object.document.getFlag("torchlight", "statusLantern");
 		//console.log("Initial statusLantern:" + statusLantern);
 		if (statusLantern == undefined || statusLantern == null) {
 			statusLantern = false;
-			await app.object.setFlag("torchlight", "statusLantern", false);
+			await app.object.document.setFlag("torchlight", "statusLantern", false);
 		}
-		let statusTorch = app.object.getFlag("torchlight", "statusTorch");
+		let statusTorch = app.object.document.getFlag("torchlight", "statusTorch");
 		//console.log("Initial statusTorch:" + statusTorch);
 		if (statusTorch == undefined || statusTorch == null) {
 			statusTorch = false;
-			await app.object.setFlag("torchlight", "statusTorch", false);
+			await app.object.document.setFlag("torchlight", "statusTorch", false);
 		}
 		//console.log("Initialised statusLight:" + statusLight);
 		//console.log("Initialised statusLantern:" + statusLantern);
